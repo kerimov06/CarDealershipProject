@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum MessageType {
 
     NO_RECORD_EXIST("404" , "This Data not found"),
+    TOKEN_IS_EXPIRED("303" , "Token is expired"),
     GENERAL_ERROR("202" , "Sorry!Have some problems , Please! Try again");
 
 
