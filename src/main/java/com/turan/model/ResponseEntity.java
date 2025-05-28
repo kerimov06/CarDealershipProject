@@ -24,7 +24,7 @@ public class ResponseEntity<T> {
             return  responseEntity;
      }
 
-     public static <T> ResponseEntity<T> error(String errorMessage){
+     public static <T>ResponseEntity<T> error(String errorMessage){
          ResponseEntity<T> responseEntity = new ResponseEntity<>();
           responseEntity.setErrorMessage(errorMessage);
           responseEntity.setData(null);

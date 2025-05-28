@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ErrorMessage {
 
-     private String ofStatic;
 
      private  MessageType messageType;
 
@@ -19,10 +18,6 @@ public class ErrorMessage {
 
             builder.append(messageType.getMessage());
 
-            if ((ofStatic!=null)){
-
-                builder.append(":" + ofStatic);
-            }
 
             return builder.toString();
       }

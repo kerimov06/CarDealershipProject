@@ -3,6 +3,7 @@ package com.turan.service;
 import com.turan.dto.DtoUser;
 import com.turan.jwt.AutRequest;
 import com.turan.jwt.AuthResponse;
+import com.turan.jwt.RefreshTokenRequest;
 
 public interface IAuthService {
 
