@@ -1,17 +1,15 @@
 package com.turan.jwt;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
-
-
-    private String accessToken;
+public class RefreshTokenRequest {
 
     private String refreshToken;
 }
