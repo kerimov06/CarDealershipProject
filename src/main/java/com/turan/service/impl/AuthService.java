@@ -1,13 +1,13 @@
 package com.turan.service.impl;
 
 import com.turan.dto.DtoUser;
+import com.turan.dto.RefreshTokenRequest;
 import com.turan.exception.BaseException;
 import com.turan.exception.ErrorMessage;
 import com.turan.exception.MessageType;
 import com.turan.jwt.AutRequest;
 import com.turan.jwt.AuthResponse;
 import com.turan.jwt.JwtService;
-import com.turan.jwt.RefreshTokenRequest;
 import com.turan.model.RefreshToken;
 import com.turan.model.User;
 import com.turan.repository.RefreshTokenRepository;
@@ -15,7 +15,6 @@ import com.turan.repository.UserRepository;
 import com.turan.service.IAuthService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -92,7 +91,31 @@ public class AuthService implements IAuthService {
             throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD_INVALID));
 
         }
+    }
 
+     public boolean isValidRefreshToken(Date expireDate){
+        return new Date().before(expireDate);
 
+     }
+
+    @Override
+    public AuthResponse refreshToken(RefreshTokenRequest refreshToken) {
+        Optional<RefreshToken> optRefreshToken =  refreshTokenRepository.findByRefreshToken(refreshToken.getRefreshToken());
+
+        if (optRefreshToken.isEmpty()){
+             throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_NOT_FOUND));
+
+        }
+
+          if (!isValidRefreshToken(optRefreshToken.get().getExpireDate())){
+              throw  new BaseException(new ErrorMessage(MessageType.TOKEN_IS_EXPIRED));
+          }
+
+               User user = (optRefreshToken.get().getUser());
+                String accessToken = jwtService.generateToken(user);
+
+             RefreshToken savedRefreshToken =  refreshTokenRepository.save(createRefreshToken(user));
+
+        return new AuthResponse(accessToken,savedRefreshToken.getRefreshToken());
     }
 }

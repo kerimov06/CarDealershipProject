@@ -2,6 +2,7 @@ package com.turan.controller.impl;
 
 import com.turan.controller.IRestAuthController;
 import com.turan.dto.DtoUser;
+import com.turan.dto.RefreshTokenRequest;
 import com.turan.jwt.AutRequest;
 import com.turan.jwt.AuthResponse;
 import com.turan.model.ResponseEntity;
@@ -28,5 +29,11 @@ public class RestAuthControllerImpl implements IRestAuthController {
     @Override
     public ResponseEntity<AuthResponse> authenticate(@RequestBody AutRequest request) {
         return ResponseEntity.ok(authService.authenticate(request));
+    }
+
+    @PostMapping("/refreshToken")
+    @Override
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshToken) {
+        return ResponseEntity.ok(authService.refreshToken(refreshToken));
     }
 }
