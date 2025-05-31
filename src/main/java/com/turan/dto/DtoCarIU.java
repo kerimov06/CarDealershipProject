@@ -1,7 +1,7 @@
 package com.turan.dto;
 
+import com.turan.model.CarStatusType;
 import com.turan.model.CurrencyType;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,15 +10,19 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoAccountIU {
+public class DtoCarIU {
 
+    private String licensePlate;
 
-    private String accountNo;
+    private String brand;
 
-    private String iban;
+    private String model;
 
-    private BigDecimal amount;
+    private BigDecimal price;
 
     private CurrencyType currencyType;
 
+    private BigDecimal damagePrice;
+
+    private CarStatusType carStatusType;
 }

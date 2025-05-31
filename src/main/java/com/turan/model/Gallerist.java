@@ -22,6 +22,6 @@ public class Gallerist {
      @Column(name = "last_name")
      private String lastName;
 
-     @OneToOne
+     @OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
      private Address address;
 }

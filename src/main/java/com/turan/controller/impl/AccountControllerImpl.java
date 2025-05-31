@@ -4,6 +4,7 @@ import com.turan.controller.IAccountController;
 import com.turan.dto.DtoAccount;
 import com.turan.dto.DtoAccountIU;
 import com.turan.dto.DtoAddressIU;
+import com.turan.model.ResponseEntity;
 import com.turan.service.IAccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +22,20 @@ public class AccountControllerImpl implements IAccountController {
 
     @PostMapping("/saveAccount")
     @Override
-    public DtoAccount saveAccount(@RequestBody DtoAccountIU account) {
-        return accountService.saveAccount(account);
+    public ResponseEntity<DtoAccount> saveAccount(@RequestBody DtoAccountIU account) {
+        return ResponseEntity.ok(accountService.saveAccount(account));
     }
 
     @GetMapping("/getAccountById/{id}")
     @Override
-    public DtoAccount getAccountById(@PathVariable(name = "id") Long id) {
-        return accountService.getAccountById(id);
+    public ResponseEntity<DtoAccount> getAccountById(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(accountService.getAccountById(id));
     }
 
     @PutMapping("/updateAccount/{id}")
     @Override
-    public DtoAccount updateAccount(@PathVariable(name = "id") Long id, @RequestBody DtoAccountIU updateAccount) {
-        return accountService.updateAccount(id,updateAccount);
+    public ResponseEntity<DtoAccount> updateAccount(@PathVariable(name = "id") Long id, @RequestBody DtoAccountIU updateAccount) {
+        return ResponseEntity.ok(accountService.updateAccount(id,updateAccount));
     }
     @DeleteMapping("/deleteAccount/{id}")
     @Override
@@ -45,8 +46,8 @@ public class AccountControllerImpl implements IAccountController {
 
     @GetMapping("/getAllAccounts")
     @Override
-    public List<DtoAccount> getAllAccount() {
-        return accountService.getAllAccount();
+    public ResponseEntity<List<DtoAccount>> getAllAccount() {
+        return ResponseEntity.ok(accountService.getAllAccount());
     }
 
 
