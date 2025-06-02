@@ -5,5 +5,6 @@ import com.turan.dto.DtoGalleristCarIU;
 
 public interface IGalleristCarService {
 
-    public DtoGalleristCar saveGalleristCar(DtoGalleristCarIU galleristCarIU);
+     public DtoGalleristCar saveGalleristCar(DtoGalleristCarIU saveGalleristCar);
+     public DtoGalleristCar getGalleristCarById(Long id);
 }

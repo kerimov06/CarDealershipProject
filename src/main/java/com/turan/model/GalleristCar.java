@@ -17,8 +17,8 @@ public class GalleristCar {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Gallerist gallerist;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Car car;
 }
