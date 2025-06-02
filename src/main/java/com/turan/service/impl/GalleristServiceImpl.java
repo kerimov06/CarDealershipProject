@@ -85,10 +85,14 @@ public class GalleristServiceImpl implements IGalleristService {
 
     @Override
     public void deleteGallerist(Long id) {
-       Optional<Gallerist> optional =  galleristRepository.findById(id);
-        if (optional.isEmpty()){
-             throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST));
-        }
-         galleristRepository.delete(optional.get());
+       try {
+           Optional<Gallerist> optional =  galleristRepository.findById(id);
+           if (optional.isPresent()) {
+               galleristRepository.delete(optional.get());
+           }
+       }catch (Exception e){
+            throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST));
+       }
+
     }
 }
