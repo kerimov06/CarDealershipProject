@@ -22,7 +22,6 @@ public class SecurityConfig {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
-
     @Autowired
     private JwtAuthenticationFilter authenticationFilter;
 
@@ -35,12 +34,21 @@ public class SecurityConfig {
     public static final String REFRESH_TOKEN = "/refreshToken";
 
 
-     @Bean
+
+    public static final String[] SWAGGER_PATHS = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
+
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
              http.csrf().disable()
                      .authorizeHttpRequests(request->
                              request.requestMatchers(AUTHENTICATE,REGISTER,REFRESH_TOKEN)
-                                     .permitAll()
+                                     .permitAll().
+                                      requestMatchers(SWAGGER_PATHS).permitAll()
                                      .anyRequest()
                                      .authenticated())
                      .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()

@@ -19,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtService jwtService;
 
@@ -59,12 +60,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                           }
                      }
 
-
                 }catch (ExpiredJwtException e){
                     throw new BaseException(new ErrorMessage(MessageType.TOKEN_IS_EXPIRED));
                 }catch (Exception e){
                      throw new BaseException(new ErrorMessage(MessageType.GENERAL_ERROR));
                 }
+
                filterChain.doFilter(request,response);
     }
 }
