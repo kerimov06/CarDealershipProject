@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Gallerist {
+public class    Gallerist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
