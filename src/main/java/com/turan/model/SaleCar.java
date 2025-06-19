@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.action.internal.OrphanRemovalAction;
 
 @Entity
 @Table(name = "sale_car", uniqueConstraints =
@@ -17,10 +18,11 @@ public class SaleCar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Gallerist gallerist;
-     @ManyToOne
+     @ManyToOne(cascade = CascadeType.ALL)
      private Car car;
-     @ManyToOne
+     @ManyToOne(cascade = CascadeType.ALL)
      private Customer customer;
 }
